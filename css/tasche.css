@@ -181,3 +181,16 @@
 .item.placeholder img{
   display:none;
 }
+
+
+/* Toast (showToast) unten im Taschenfeld anzeigen */
+.toast.in-drop{
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: auto;
+
+  max-width: calc(100% - 40px);
+  z-index: 6;
+}

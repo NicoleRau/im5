@@ -5,6 +5,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const prevPageBtn = document.getElementById("prevPageBtn");
   const nextPageBtn = document.getElementById("nextPageBtn");
   const pageInfo = document.getElementById("pageInfo");
+  const doneModal = document.getElementById("doneBagModal");
+  const closeDoneBtn = document.getElementById("closeDoneBag");
+  const goDressBtn = document.getElementById("goDressBtn");
+  const replayBagBtn = document.getElementById("replayBagBtn");
+
+
+
+  let doneShown = false; // damit es nicht dauernd wieder aufpoppt
+
 
   const pageSize = 10;
   let page = 0;
@@ -61,7 +70,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Progress
   progressEl.textContent = `${state.packed.length}/${ITEMS.length} gepackt`;
+
+  // Fertig-Check (nur einmal anzeigen)
+  if(state.packed.length === ITEMS.length && !doneShown){
+    doneShown = true;
+    openDoneModal();
+  }
 }
+
 
 
   function makeItemCard(item){
@@ -165,6 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("resetBagModal");
   const cancel = document.getElementById("cancelBagReset");
   const confirmReset = document.getElementById("confirmBagReset");
+  
 
   function openModal(){
     if(!modal) return;
@@ -189,6 +206,19 @@ document.addEventListener("DOMContentLoaded", () => {
       if(e.target === modal) closeModal();
     });
   }
+
+    function openDoneModal(){
+    if(!doneModal) return;
+    doneModal.classList.add("open");
+    doneModal.setAttribute("aria-hidden","false");
+  }
+
+  function closeDoneModal(){
+    if(!doneModal) return;
+    doneModal.classList.remove("open");
+    doneModal.setAttribute("aria-hidden","true");
+  }
+
   if(confirmReset){
     confirmReset.addEventListener("click", () => {
       localStorage.removeItem(STORAGE_KEYS.BAG);
@@ -205,6 +235,21 @@ if(backBtn){
     window.location.href = "index.html";
   });
 }
+
+  if(closeDoneBtn){
+    closeDoneBtn.addEventListener("click", closeDoneModal);
+  }
+  if(doneModal){
+    doneModal.addEventListener("click", (e) => {
+      if(e.target === doneModal) closeDoneModal();
+    });
+  }
+  if(goDressBtn){
+    goDressBtn.addEventListener("click", () => {
+      window.location.href = "ausruestung.html";
+    });
+  }
+  
 
 
 

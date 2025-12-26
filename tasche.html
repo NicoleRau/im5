@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="css/tasche.css" />
 </head>
 <body>
-  <div id="toast" class="toast"></div>
 
   <div class="container stage">
     <div class="header">
@@ -30,7 +29,9 @@
         <span>Ziehe die Ausrüstungsteile in die Tasche.</span>
       </div>
       <img class="bg-img" src="assets/tasche.png" alt="Tasche">
+      <div id="toast" class="toast in-drop"></div>
     </div>
+
 
   <div class="itembar">
     <div class="itembar-title">
@@ -60,6 +61,21 @@
     </div>
   </div>
 </div>
+
+<div class="modal" id="doneBagModal" aria-hidden="true">
+  <div class="modal-card">
+    <h2 style="margin-top:0;">Super!</h2>
+    <p style="font-weight:600;">Du hast alle Teile in die Tasche gepackt!</p>
+
+    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:12px;flex-wrap:wrap;">
+      <button class="btn secondary" id="replayBagBtn">Nochmal packen</button>
+      <button class="btn secondary" id="closeDoneBag">Schliessen</button>
+      <button class="btn" id="goDressBtn">Zur Ausrüstung</button>
+    </div>
+
+  </div>
+</div>
+
 
 </body>
 </html>

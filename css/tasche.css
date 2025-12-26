@@ -271,7 +271,7 @@
 /* ===== Tablet ===== */
 @media (max-width: 900px){
   .container{ padding: 14px; }
-
+ 
   .drop-area{
     min-height: 420px;
   }

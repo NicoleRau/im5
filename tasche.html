@@ -1,16 +1,43 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Startseite</title>
-  <link rel="stylesheet" href="css/mother.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tasche packen</title>
+  <link rel="stylesheet" href="css/mueter.css" />
   <link rel="stylesheet" href="css/tasche.css" />
-  <link rel="icon" href="" />
 </head>
 <body>
+  <div id="toast" class="toast"></div>
 
-    <p>blub</p>
+  <div class="container stage">
+    <div class="header">
+      <div class="brand">
+        <h1>Tasche packen</h1>
+        <p>Zieh jedes Teil in die Tasche.</p>
+      </div>
+          <button class="btn secondary" id="resetBagBtn">Reset</button>
+        <a class="btn secondary" href="index.html">Zurück</a>
+    </div>
 
+    <div class="drop-area" id="dropZone" aria-label="Tasche Drop Zone">
+      <div class="drop-hint">
+        <span class="progress" id="progress">0/0 gepackt</span>
+        <span>Drop hier in die Tasche</span>
+      </div>
+      <img class="bg-img" src="assets/tasche.png" alt="Tasche">
+    </div>
+
+    <div class="itembar">
+      <div class="itembar-title">
+        <strong>Teile</strong>
+        <span style="font-weight:800;">Horizontal scrollen →</span>
+      </div>
+      <div class="scroller" id="scroller"></div>
+    </div>
+  </div>
+
+  <script src="js/index.js"></script>
+  <script src="js/tasche.js"></script>
 </body>
 </html>

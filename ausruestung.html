@@ -1,16 +1,42 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Startseite</title>
-  <link rel="stylesheet" href="css/mother.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ausrüstung anziehen</title>
+  <link rel="stylesheet" href="css/mueter.css" />
   <link rel="stylesheet" href="css/ausruestung.css" />
-  <link rel="icon" href="" />
 </head>
 <body>
+  <div id="toast" class="toast"></div>
 
-    <p>blub</p>
+  <div class="container stage">
+    <div class="header">
+      <div class="brand">
+        <h1>Ausrüstung anziehen</h1>
+        <p>Zieh die Teile in der richtigen Reihenfolge an.</p>
+      </div>
+      <a class="btn secondary" href="index.html">Zurück</a>
+    </div>
 
+    <div class="drop-area" id="dropZone" aria-label="Figur Drop Zone">
+      <div class="drop-hint">
+        <span class="progress" id="progress">0/0 angezogen</span>
+        <span id="nextHint">Als Nächstes: …</span>
+      </div>
+      <img class="bg-img" src="assets/figur.png" alt="Person">
+    </div>
+
+    <div class="itembar">
+      <div class="itembar-title">
+        <strong>Teile</strong>
+        <span style="font-weight:800;">Horizontal scrollen →</span>
+      </div>
+      <div class="scroller" id="scroller"></div>
+    </div>
+  </div>
+
+  <script src="js/index.js"></script>
+  <script src="js/ausruestung.js"></script>
 </body>
 </html>

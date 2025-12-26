@@ -1,0 +1,6 @@
+/* Startseite: Karten immer untereinander (auch am Desktop) */
+.page-index .grid{
+  grid-template-columns: 1fr !important;
+  max-width: 920px;          /* optional: damit es nicht zu breit wirkt */
+  margin: 0 auto;
+}

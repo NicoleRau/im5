@@ -21,8 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const pageSize = 10;
   let page = 0;
 
-
-  // TODO: Sobald du Asset-Namen hast, hier anpassen
   const ITEMS = [
     { id:"schlittschuhe", label:"Schlittschuhe", img:"assets/schlittschuhe.png" },
     { id:"stock", label:"Stock", img:"assets/stock.png" },
@@ -254,7 +252,15 @@ if(backBtn){
   }
   
 
+  if(replayBagBtn){
+    replayBagBtn.addEventListener("click", () => {
+      localStorage.removeItem(STORAGE_KEYS.BAG);
+      showToast("Okay – wir packen nochmal!");
+      closeDoneModal();
+      location.reload();
+    });
+  }
+
 
 
 });
-

@@ -7,9 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const nextPageBtn = document.getElementById("nextPageBtn");
   const pageInfo = document.getElementById("pageInfo");
 
-
-
-
+  /* Reset Modal */
   const doneModal = document.getElementById("doneBagModal");
   const closeDoneBtn = document.getElementById("closeDoneBag");
   const goDressBtn = document.getElementById("goDressBtn");
@@ -24,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let page = 0;
 
 
+  // TODO: Sobald du Asset-Namen hast, hier anpassen
   const ITEMS = [
     { id:"schlittschuhe", label:"Schlittschuhe", img:"assets/schlittschuhe.png" },
     { id:"stock", label:"Stock", img:"assets/stock.png" },

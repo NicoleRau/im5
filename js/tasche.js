@@ -2,9 +2,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const scroller = document.getElementById("scroller");
   const dropZone = document.getElementById("dropZone");
   const progressEl = document.getElementById("progress");
+
   const prevPageBtn = document.getElementById("prevPageBtn");
   const nextPageBtn = document.getElementById("nextPageBtn");
   const pageInfo = document.getElementById("pageInfo");
+
+
+
+
   const doneModal = document.getElementById("doneBagModal");
   const closeDoneBtn = document.getElementById("closeDoneBag");
   const goDressBtn = document.getElementById("goDressBtn");
@@ -19,7 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let page = 0;
 
 
-  // TODO: Sobald du Asset-Namen hast, hier anpassen
   const ITEMS = [
     { id:"schlittschuhe", label:"Schlittschuhe", img:"assets/schlittschuhe.png" },
     { id:"stock", label:"Stock", img:"assets/stock.png" },

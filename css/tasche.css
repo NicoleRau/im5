@@ -1,3 +1,4 @@
+/* Grundstruktur */
 .stage{
   display:grid;
   grid-template-rows: auto 1fr auto;
@@ -5,6 +6,7 @@
   gap: 14px;
 }
 
+/* Drop Area */
 .drop-area{
   position: relative;
   border-radius: var(--radius);
@@ -44,13 +46,30 @@
   display:inline-block;
 }
 
+/* Toast */
+.toast.in-drop{
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: auto;
+  max-width: calc(100% - 40px);
+  z-index: 6;
+}
+
+
+/* Itembar */
 .itembar{
   background: rgba(255,255,255,0.35);
   border: 2px solid rgba(0,75,153,0.15);
   border-radius: var(--radius);
   padding: 10px;
   box-shadow: var(--shadow);
+  height: 170px;
+  display: flex;
+  flex-direction: column;
 }
+
 .itembar-title{
   display:flex;
   align-items:center;
@@ -59,20 +78,33 @@
   margin-bottom: 8px;
 }
 
-.scroller{
-  display:flex;
-  gap: 10px;
-  overflow-x:auto;
-  padding-bottom: 4px;
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x mandatory;
-}
-.scroller::-webkit-scrollbar{ height:10px; }
-.scroller::-webkit-scrollbar-thumb{
-  background: rgba(0,75,153,0.25);
-  border-radius: 999px;
+
+/* Pager */
+.page-info{
+  font-weight: 800;
 }
 
+.pager{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.pager .btn{
+  height: 36px;
+  padding: 0 12px;
+}
+
+/* Scroller */
+.scroller{
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+/* Item Cards */
 .item{
   width: 92px;
   min-width: 92px;
@@ -87,47 +119,59 @@
   justify-content:center;
   gap:6px;
   padding: 8px;
-  scroll-snap-align: start;
+  /*scroll-snap-align: start;*/
   user-select:none;
   touch-action:none; /* wichtig für Pointer-Drag */
 }
+
 .item img{
   width: 46px;
   height: 46px;
   object-fit: contain;
   pointer-events:none;
 }
+
 .item span{
   font-size: 11px;
   font-weight: 900;
   text-align: center;
   line-height: 1.15;
 
-  /* FIX für lange Wörter */
+  /*  für lange Wörter */
   word-break: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
 }
 
+/* Platzhalter */
+.item placeholer{
+  opacity: 0.25;
+  border-style: dashed;
+  box-shadow: none;
+}
+.item placeholder img{
+  display:none;
+}
 
 /* Drag ghost */
 .drag-ghost{
   position: fixed;
-  left:0; top:0;
+  left: 0;
+  top: 0;
   width: 92px;
   height: 92px;
   z-index: 9999;
-  pointer-events:none;
-  transform: translate(-9999px,-9999px);
+  pointer-events: none;
+  transform: translate(-9999px, -9999px);
   border-radius: 16px;
   background: rgba(255,255,255,0.85);
   border: 2px solid rgba(0,75,153,0.25);
   box-shadow: var(--shadow);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   padding: 8px;
 }
 .drag-ghost img{
@@ -138,68 +182,119 @@
 .drag-ghost span{
   font-size: 11px;
   font-weight: 900;
-  text-align:center;
-}
-
-/* Verhindert, dass die Seite schrumpft, wenn weniger Items da sind */
-.itembar{
-  min-height: 150px;  /* kannst du bei Bedarf auf 140/160 anpassen */
-}
-
-.scroller{
-  min-height: 110px;  /* Höhe für 1 Reihe Item-Karten */
-  align-items: flex-start;
-}
-
-/* Paging-Layout: Itembar bleibt immer gleich hoch */
-.itembar{
-  height: 170px;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Scroller zeigt eine feste Reihe von 10 Items, ohne horizontales Scrollen */
-.scroller{
-  flex: 1;
-  overflow: hidden;
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-}
-
-/* Pager Buttons etwas kompakter */
-.pager{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-.pager .btn{
-  height: 36px;
-  padding: 0 12px;
-}
-
-/* Platzhalter-Slots, damit immer 10 Felder stehen */
-.item.placeholder{
-  opacity: 0.25;
-  border-style: dashed;
-  box-shadow: none;
-}
-.item.placeholder img{
-  display:none;
+  text-align: center;
 }
 
 
-/* Toast (showToast) unten im Taschenfeld anzeigen */
-.toast.in-drop{
-  position: absolute;
-  bottom: 14px;
-  left: 50%;
-  transform: translateX(-50%);
-  top: auto;
+/* RESPONSIVE */
+/* Tablet */
 
-  max-width: calc(100% - 40px);
-  z-index: 6;
+@media (max-width: 900px){
+  .container{ padding: 14px; }
+  .drop-area{ min-height: 420px; }
 }
+
+
+
+/* Handy */
+@media (max-width: 600px){
+  .container{ padding: 12px; }
+
+  .header{
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .header-actions{
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .brand h1{
+    font-size: 34px;
+  }
+
+  .drop-area{
+    min-height: 420px;
+  }
+
+  .drop-hint{
+    inset: 8px 8px auto 8px;
+    padding: 6px 10px;
+    border-radius: 14px;
+    gap: 6px;
+    font-size: 13px;
+    flex-wrap: wrap;
+  }
+  .progress{
+    padding: 6px 10px;
+  }
+
+  .itembar{
+    height: 280px;
+    padding: 8px;
+  }
+
+  .scroller{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    overflow: visible;
+    align-items: stretch;
+  }
+
+  .item{
+    width: auto;
+    min-width: 0;
+    height: 92px;
+  }
+
+  .item img{
+    width: 38px;
+    height: 38px;
+  }
+
+  .item span{
+    font-size: 10px;
+  }
+
+  .pager .btn{
+    height: 34px;
+    padding: 0 10px;
+  }
+
+  .toast.in-drop{
+    bottom: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+    border-radius: 16px;
+    max-width: calc(100% - 18px);
+  }
+
+  .drop-area .bg-img{
+    padding: 28px 10px 72px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ===== Responsive: Handy ===== */
 @media (max-width: 600px){

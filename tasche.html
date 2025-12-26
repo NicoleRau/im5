@@ -7,75 +7,72 @@
   <link rel="stylesheet" href="css/mueter.css" />
   <link rel="stylesheet" href="css/tasche.css" />
 </head>
-<body>
 
+<body>
   <div class="container stage">
-    <div class="header">
+    <header class="header">
       <div class="brand">
         <h1>Tasche packen</h1>
         <p>Zieh jedes Teil in die Tasche.</p>
       </div>
 
-    <div class="header-actions">
-      <button class="btn secondary" id="resetBagBtn">Reset</button>
-      <button class="btn secondary" id="backBtn">Zurück</button>
-    </div>
-  </div>
+      <div class="header-actions">
+        <button class="btn secondary" id="resetBagBtn" type="button">Reset</button>
+        <button class="btn secondary" id="backBtn" type="button">Zurück</button>
+      </div>
+    </header>
 
-
-    <div class="drop-area" id="dropZone" aria-label="Tasche Drop Zone">
+    <main class="drop-area" id="dropZone" aria-label="Tasche Drop Zone">
       <div class="drop-hint">
         <span class="progress" id="progress">0/0 gepackt</span>
-        <span>Ziehe die Ausrüstungsteile in die Tasche.</span>
+        <span class="hint-text">Ziehe die Ausrüstungsteile in die Tasche.</span>
       </div>
       <img class="bg-img" src="assets/tasche.png" alt="Tasche">
       <div id="toast" class="toast in-drop"></div>
+    </main>
+
+
+    <div class="itembar" aria-label="Ausrüstungsteile">
+      <div class="itembar-title">
+        <strong>Teile</strong>
+
+      <div class="pager">
+        <button class="btn secondary" id="prevPageBtn" type="button" aria-label="Vorherige Seite">◀</button>
+        <span id="pageInfo" style="font-weight:800;">1/1</span>
+        <button class="btn secondary" id="nextPageBtn" type="button" aria-label="Nächste Seite">▶</button>
+      </div>
     </div>
 
-
-  <div class="itembar">
-    <div class="itembar-title">
-      <strong>Teile</strong>
-
-    <div class="pager">
-      <button class="btn secondary" id="prevPageBtn">◀</button>
-      <span id="pageInfo" style="font-weight:800;">1/1</span>
-      <button class="btn secondary" id="nextPageBtn">▶</button>
+    <div class="scroller" id="scroller">
     </div>
   </div>
-
-  <div class="scroller" id="scroller"></div>
-</div>
-
 
   <script src="js/index.js"></script>
   <script src="js/tasche.js"></script>
 
   <div class="modal" id="resetBagModal" aria-hidden="true">
-  <div class="modal-card">
-    <h2 style="margin-top:0;">Tasche zurücksetzen?</h2>
-    <p style="font-weight:600;">Alle gepackten Teile werden entfernt.</p>
-    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:12px;flex-wrap:wrap;">
-      <button class="btn secondary" id="cancelBagReset">Abbrechen</button>
-      <button class="btn" id="confirmBagReset">Ja, Reset</button>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="resetTitle">
+      <h2 id="resetTitle" style="margin-top:0;">Tasche zurücksetzen?</h2>
+      <p style="font-weight:600;">Alle gepackten Teile werden entfernt.</p>
+
+      <div class="modal-actions">
+        <button class="btn secondary" id="cancelBagReset">Abbrechen</button>
+        <button class="btn" id="confirmBagReset">Ja, Reset</button>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="modal" id="doneBagModal" aria-hidden="true">
-  <div class="modal-card">
-    <h2 style="margin-top:0;">Super!</h2>
-    <p style="font-weight:600;">Du hast alle Teile in die Tasche gepackt!</p>
+  <div class="modal" id="doneBagModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="doneTitle">
+      <h2 id="doneTitle" style="margin-top:0;">Super!</h2>
+      <p style="font-weight:600;">Du hast alle Teile in die Tasche gepackt!</p>
 
-    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:12px;flex-wrap:wrap;">
-      <button class="btn secondary" id="replayBagBtn">Nochmal packen</button>
-      <button class="btn secondary" id="closeDoneBag">Schliessen</button>
-      <button class="btn" id="goDressBtn">Zur Ausrüstung</button>
+      <div class="modal-actions">
+        <button class="btn secondary" id="replayBagBtn">Nochmal packen</button>
+        <button class="btn secondary" id="closeDoneBag">Schliessen</button>
+        <button class="btn" id="goDressBtn">Zur Ausrüstung</button>
+      </div>
     </div>
-
   </div>
-</div>
-
-
 </body>
 </html>

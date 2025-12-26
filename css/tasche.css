@@ -134,3 +134,50 @@
   font-weight: 900;
   text-align:center;
 }
+
+/* Verhindert, dass die Seite schrumpft, wenn weniger Items da sind */
+.itembar{
+  min-height: 150px;  /* kannst du bei Bedarf auf 140/160 anpassen */
+}
+
+.scroller{
+  min-height: 110px;  /* Höhe für 1 Reihe Item-Karten */
+  align-items: flex-start;
+}
+
+/* Paging-Layout: Itembar bleibt immer gleich hoch */
+.itembar{
+  height: 170px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Scroller zeigt eine feste Reihe von 10 Items, ohne horizontales Scrollen */
+.scroller{
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+/* Pager Buttons etwas kompakter */
+.pager{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.pager .btn{
+  height: 36px;
+  padding: 0 12px;
+}
+
+/* Platzhalter-Slots, damit immer 10 Felder stehen */
+.item.placeholder{
+  opacity: 0.25;
+  border-style: dashed;
+  box-shadow: none;
+}
+.item.placeholder img{
+  display:none;
+}

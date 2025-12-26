@@ -47,7 +47,7 @@ body{
   appearance:none;
   border:0;
   background: var(--btn);
-  color:#fff;
+  color:var(--text);
   font-weight: 800;
   padding: 12px 16px;
   border-radius: 999px;
@@ -100,4 +100,41 @@ body{
   display:none;
 }
 
+.header-actions{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
 
+.header-actions .btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.header-actions .btn.secondary{
+  min-width: 110px; /* optional: beide gleich breit */
+}
+
+.modal{
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(0,0,0,0.25);
+  z-index: 20000;
+}
+
+.modal.open{ display:flex; }
+
+.modal-card{
+  width: min(520px, 100%);
+  background: rgba(255,255,255,0.95);
+  border: 2px solid rgba(0,75,153,0.2);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+  padding: 16px;
+}

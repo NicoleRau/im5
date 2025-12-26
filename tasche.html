@@ -16,28 +16,50 @@
         <h1>Tasche packen</h1>
         <p>Zieh jedes Teil in die Tasche.</p>
       </div>
-          <button class="btn secondary" id="resetBagBtn">Reset</button>
-        <a class="btn secondary" href="index.html">Zurück</a>
+
+    <div class="header-actions">
+      <button class="btn secondary" id="resetBagBtn">Reset</button>
+      <button class="btn secondary" id="backBtn">Zurück</button>
     </div>
+  </div>
+
 
     <div class="drop-area" id="dropZone" aria-label="Tasche Drop Zone">
       <div class="drop-hint">
         <span class="progress" id="progress">0/0 gepackt</span>
-        <span>Drop hier in die Tasche</span>
+        <span>Ziehe die Ausrüstungsteile in die Tasche.</span>
       </div>
       <img class="bg-img" src="assets/tasche.png" alt="Tasche">
     </div>
 
-    <div class="itembar">
-      <div class="itembar-title">
-        <strong>Teile</strong>
-        <span style="font-weight:800;">Horizontal scrollen →</span>
-      </div>
-      <div class="scroller" id="scroller"></div>
+  <div class="itembar">
+    <div class="itembar-title">
+      <strong>Teile</strong>
+
+    <div class="pager">
+      <button class="btn secondary" id="prevPageBtn">◀</button>
+      <span id="pageInfo" style="font-weight:800;">1/1</span>
+      <button class="btn secondary" id="nextPageBtn">▶</button>
     </div>
   </div>
 
+  <div class="scroller" id="scroller"></div>
+</div>
+
+
   <script src="js/index.js"></script>
   <script src="js/tasche.js"></script>
+
+  <div class="modal" id="resetBagModal" aria-hidden="true">
+  <div class="modal-card">
+    <h2 style="margin-top:0;">Tasche zurücksetzen?</h2>
+    <p style="font-weight:600;">Alle gepackten Teile werden entfernt.</p>
+    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:12px;flex-wrap:wrap;">
+      <button class="btn secondary" id="cancelBagReset">Abbrechen</button>
+      <button class="btn" id="confirmBagReset">Ja, Reset</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

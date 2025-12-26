@@ -2,6 +2,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const scroller = document.getElementById("scroller");
   const dropZone = document.getElementById("dropZone");
   const progressEl = document.getElementById("progress");
+  const prevPageBtn = document.getElementById("prevPageBtn");
+  const nextPageBtn = document.getElementById("nextPageBtn");
+  const pageInfo = document.getElementById("pageInfo");
+
+  const pageSize = 10;
+  let page = 0;
+
 
   // TODO: Sobald du Asset-Namen hast, hier anpassen
   const ITEMS = [
@@ -27,11 +34,35 @@ document.addEventListener("DOMContentLoaded", () => {
   let dragging = null;
 
   function render(){
-    scroller.innerHTML = "";
-    const remaining = ITEMS.filter(it => !state.packed.includes(it.id));
-    remaining.forEach(it => scroller.appendChild(makeItemCard(it)));
-    progressEl.textContent = `${state.packed.length}/${ITEMS.length} gepackt`;
+  const remaining = ITEMS.filter(it => !state.packed.includes(it.id));
+
+  // Seitenzahl berechnen + Seite clampen
+  const totalPages = Math.max(1, Math.ceil(remaining.length / pageSize));
+  if(page > totalPages - 1) page = totalPages - 1;
+  if(page < 0) page = 0;
+
+  // UI: Pager
+  if(pageInfo) pageInfo.textContent = `${page + 1}/${totalPages}`;
+  if(prevPageBtn) prevPageBtn.disabled = (page === 0);
+  if(nextPageBtn) nextPageBtn.disabled = (page >= totalPages - 1);
+
+  // Inhalte rendern (max 10)
+  scroller.innerHTML = "";
+  const start = page * pageSize;
+  const slice = remaining.slice(start, start + pageSize);
+
+  slice.forEach(it => scroller.appendChild(makeItemCard(it)));
+
+  // Platzhalter auffüllen, damit immer 10 Slots sichtbar sind
+  const missing = pageSize - slice.length;
+  for(let i=0; i<missing; i++){
+    scroller.appendChild(makePlaceholderCard());
   }
+
+  // Progress
+  progressEl.textContent = `${state.packed.length}/${ITEMS.length} gepackt`;
+}
+
 
   function makeItemCard(item){
     const el = document.createElement("div");
@@ -41,6 +72,14 @@ document.addEventListener("DOMContentLoaded", () => {
     attachPointerDrag(el, item);
     return el;
   }
+
+  function makePlaceholderCard(){
+  const el = document.createElement("div");
+  el.className = "item placeholder";
+  el.innerHTML = `<span style="font-size:26px;line-height:1;">•</span><span>&nbsp;</span>`;
+  return el;
+}
+
 
   function createGhost(){
     const g = document.createElement("div");
@@ -105,6 +144,69 @@ document.addEventListener("DOMContentLoaded", () => {
     return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
   }
 
+  if(prevPageBtn){
+  prevPageBtn.addEventListener("click", () => {
+    page -= 1;
+    render();
+  });
+  }
+  if(nextPageBtn){
+  nextPageBtn.addEventListener("click", () => {
+    page += 1;
+    render();
+  });
+  }
+
+
   render();
+
+    // --- Reset nur für Tasche (Modal) ---
+  const resetBtn = document.getElementById("resetBagBtn");
+  const modal = document.getElementById("resetBagModal");
+  const cancel = document.getElementById("cancelBagReset");
+  const confirmReset = document.getElementById("confirmBagReset");
+
+  function openModal(){
+    if(!modal) return;
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden","false");
+  }
+
+  function closeModal(){
+    if(!modal) return;
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden","true");
+  }
+
+  if(resetBtn){
+    resetBtn.addEventListener("click", openModal);
+  }
+  if(cancel){
+    cancel.addEventListener("click", closeModal);
+  }
+  if(modal){
+    modal.addEventListener("click", (e) => {
+      if(e.target === modal) closeModal();
+    });
+  }
+  if(confirmReset){
+    confirmReset.addEventListener("click", () => {
+      localStorage.removeItem(STORAGE_KEYS.BAG);
+      showToast("Tasche zurückgesetzt.");
+      closeModal();
+      location.reload();
+    });
+  }
+
+
+  const backBtn = document.getElementById("backBtn");
+if(backBtn){
+  backBtn.addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
+}
+
+
+
 });
 

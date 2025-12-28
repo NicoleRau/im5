@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="css/ausruestung.css" />
 </head>
 <body>
-  <div id="toast" class="toast"></div>
 
   <div class="container stage">
     <div class="header">
@@ -16,27 +15,62 @@
         <h1>Ausrüstung anziehen</h1>
         <p>Zieh die Teile in der richtigen Reihenfolge an.</p>
       </div>
-      <a class="btn secondary" href="index.html">Zurück</a>
+      <div class="header-actions">
+        <button class="btn secondary" id="resetDressBtn" type="button">Reset</button>
+        <button class="btn secondary" id="backBtn" type="button">Zurück</button>
+      </div>
     </div>
 
     <div class="drop-area" id="dropZone" aria-label="Figur Drop Zone">
       <div class="drop-hint">
         <span class="progress" id="progress">0/0 angezogen</span>
-        <span id="nextHint">Als Nächstes: …</span>
+        <span id="nextHint"></span>
       </div>
       <img class="bg-img" src="assets/figur.png" alt="Person">
+      <div id="toast" class="toast in-drop"></div>
     </div>
 
-    <div class="itembar">
+    <div class="itembar" aria-label="Ausrüstungsteile">
       <div class="itembar-title">
         <strong>Teile</strong>
-        <span style="font-weight:800;">Horizontal scrollen →</span>
+
+        <div class="pager">
+          <button class="btn secondary" id="prevPageBtn" type="button" aria-label="Vorherige Seite">◀</button>
+          <span id="pageInfo" style="font-weight:800">1/1</span>
+          <button class="btn secondary" id="nextPageBtn" type="button" aria-label="Nächste Seite">▶</button>
+        </div>
       </div>
+
       <div class="scroller" id="scroller"></div>
     </div>
-  </div>
 
   <script src="js/index.js"></script>
   <script src="js/ausruestung.js"></script>
+
+  <div class="modal" id="resetDressModal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="resetDressTitle">
+    <h2 id="resetDressTitle" style="margin-top:0;">Ausrüstung zurücksetzen?</h2>
+    <p style="font-weight:600;">Alle angezogenen Teile werden entfernt.</p>
+
+    <div class="modal-actions">
+      <button class="btn secondary" id="cancelDressReset" type="button">Abbrechen</button>
+      <button class="btn" id="confirmDressReset" type="button">Ja, Reset</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="doneDressModal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="doneDressTitle">
+    <h2 id="doneDressTitle" style="margin-top:0;">Super!</h2>
+    <p style="font-weight:600;">Du hast alle Teile richtig angezogen!</p>
+
+    <div class="modal-actions">
+      <button class="btn secondary" id="replayDressBtn" type="button">Nochmal anziehen</button>
+      <button class="btn secondary" id="closeDoneDress" type="button">Schliessen</button>
+      <button class="btn" id="goBagBtn" type="button">Zur Tasche</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

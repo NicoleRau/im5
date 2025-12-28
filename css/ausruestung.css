@@ -21,6 +21,9 @@
   display:block;
   pointer-events:none;
   user-select:none;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  box-sizing: border-box;
 }
 
 .drop-hint{
@@ -50,6 +53,9 @@
   border-radius: var(--radius);
   padding: 10px;
   box-shadow: var(--shadow);
+  height: 170px;
+  display: flex;
+  flex-direction: column;
 }
 .itembar-title{
   display:flex;
@@ -60,18 +66,28 @@
 }
 
 .scroller{
-  display:flex;
+  flex: 1;
+  overflow: hidden;
+  display: flex;
   gap: 10px;
-  overflow-x:auto;
-  padding-bottom: 4px;
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x mandatory;
+  align-items: flex-start;
 }
 .scroller::-webkit-scrollbar{ height:10px; }
 .scroller::-webkit-scrollbar-thumb{
   background: rgba(0,75,153,0.25);
   border-radius: 999px;
 }
+
+.pager{
+  display:flex;
+  align-items: center;
+  gap:8px;
+}
+.pager .btn{
+  height: 36px;
+  padding: 0 12px;
+}
+
 
 .item{
   width: 92px;
@@ -102,7 +118,19 @@
   font-weight: 900;
   text-align:center;
   line-height: 1.1;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
+
+.item.placeholder{
+  opacity: 0.25;
+  border-style: dashed;
+  box-shadow: none;
+}
+.item.placeholder img{ display:none; }
+
+
 
 /* Drag ghost */
 .drag-ghost{
@@ -133,4 +161,15 @@
   font-size: 11px;
   font-weight: 900;
   text-align:center;
+}
+
+.toast.in-drop{
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: auto;
+
+  max-width: calc(100% - 40px);
+  z-index: 6;
 }

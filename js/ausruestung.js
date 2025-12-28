@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
    /* Positionen Ausrüstungsteile */
   const SNAP_POS = {
     intimschoner: { left: 48, top: 59, width: 25},
-    stuelpen: { left: 48, top: 70, width: 25},
+    stuelpen: { left: 48, top: 75, width: 25},
     hosen: { left: 49, top: 60, width: 40},
     schlittschuhe: { left: 48, top: 85, width: 20},
     knieschoner: { left: 49, top: 75, width: 30},

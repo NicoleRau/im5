@@ -67,10 +67,10 @@ document.addEventListener("DOMContentLoaded", () => {
   /* Reihenfolge, ohne Stock/Trinkflasche */
   const WEARABLE = [
     { id:"intimschoner", label:"Intimschoner", img:"assets/intimschoner.png", order:1 },
-    { id:"knieschoner", label:"Knieschoner", img:"assets/knieschoner.png", order:5 },
-    { id:"stuelpen", label:"Stülpen", img:"assets/stulpen.png", order:2 },
+    { id:"knieschoner", label:"Knieschoner", img:"assets/knieschoner.png", order:2 },
     { id:"hosen", label:"Hosen", img:"assets/hose.png", order:3 },
-    { id:"schlittschuhe", label:"Schlittschuhe", img:"assets/schlittschuhe.png", order:4 },
+    { id:"stuelpen", label:"Stülpen", img:"assets/stulpen.png", order:4 },
+    { id:"schlittschuhe", label:"Schlittschuhe", img:"assets/schlittschuhe.png", order:5 },
     { id:"brustpanzer", label:"Brustpanzer", img:"assets/brustpanzer.png", order:6 },
     { id:"ellenbogenschoner", label:"Ellenbogenschoner", img:"assets/ellenbogenschoner.png", order:7 },
     { id:"trikot", label:"Trikot", img:"assets/trikot.png", order:8 },
@@ -360,6 +360,24 @@ document.addEventListener("DOMContentLoaded", () => {
       closeModal(doneModal);
       location.reload();
 
+    });
+  }
+
+  if(closeDoneBtn){
+    closeDoneBtn.addEventListener("click", () => {
+      closeModal(doneModal);
+    });
+  }
+
+  if(goBagBtn){
+    goBagBtn.addEventListener("click", () => {
+      window.location.href = "tasche.html";
+    });
+  }
+
+  if(doneModal){
+    doneModal.addEventListener("click", e => {
+      if(e.target === doneModal) closeModal(doneModal);
     });
   }
 

@@ -39,6 +39,27 @@
   align-items:center;
 }
 
+/* Layer über der Figur */
+.snap-layer{
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* platziertes Ausrüstungsteil */
+.snap-item{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Reihenfolge: Figur unten, Snap darüber */
+.drop-area .bg-img{ position: relative; z-index: 1;}
+.drop-hint{ z-index: 5;}
+
+
 .progress{
   font-weight: 900;
   padding: 8px 12px;
@@ -172,4 +193,14 @@
 
   max-width: calc(100% - 40px);
   z-index: 6;
+}
+
+/* Debug-Zonen sichtbar machen (nur zum Einstellen) */
+.snap-zone-debug{
+  position: absolute;
+  border: 3px dashed rgba(240,131,36,0.95);
+  background: rgba(240,131,36,0.15);
+  border-radius: 16px;
+  z-index: 4;
+  pointer-events: none;
 }

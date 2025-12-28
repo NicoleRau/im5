@@ -24,17 +24,53 @@ document.addEventListener("DOMContentLoaded", () => {
   const nextPageBtn = document.getElementById("nextPageBtn");
   const pageInfo = document.getElementById("pageInfo");
 
+  /* Snap */
+  const snapLayer = document.getElementById("snapLayer");
+
   const pageSize = 10;
   let page = 0;
   let doneShown = false;
 
+   /* Positionen Ausrüstungsteile */
+  const SNAP_POS = {
+    intimschoner: { left: 48, top: 59, width: 25},
+    stuelpen: { left: 48, top: 70, width: 25},
+    hosen: { left: 49, top: 60, width: 40},
+    schlittschuhe: { left: 48, top: 85, width: 20},
+    knieschoner: { left: 49, top: 75, width: 30},
+    brustpanzer: { left:  48, top: 45, width: 32},
+    ellenbogenschoner: { left: 49, top: 50, width: 20},
+    trikot: { left: 48, top: 50, width: 35},
+    halsschutz: { left: 48, top: 40, width: 15},
+    helm: { left: 50, top: 30, width: 40},
+    handschuhe: {left: 58, top: 45, width: 18}
+  };
+
+  /* Snap-Zonen */
+  const SNAP_ZONES = {
+    intimschoner: { left: 36, top: 53, width: 25, height:15 },
+    stuelpen: { left: 36, top: 68, width: 25, height:15 },
+    hosen: { left: 36, top: 53, width: 30, height:20 },
+    schlittschuhe: { left: 38, top: 83, width: 20, height:10 },
+    knieschoner: { left: 34, top: 71, width: 30, height:12 },
+    brustpanzer: { left:  32, top: 38, width: 32, height:22 },
+    ellenbogenschoner: { left: 28, top: 48, width: 40, height:10 },
+    trikot: { left: 32, top: 38, width: 32, height:22 },
+    halsschutz: { left: 41, top: 35, width: 15, height:10 },
+    helm: { left: 38, top: 10, width: 20, height:30 },
+    handschuhe: {left: 28, top: 57, width: 40, height:10 }
+  }
+
+
+
+
   /* Reihenfolge, ohne Stock/Trinkflasche */
   const WEARABLE = [
     { id:"intimschoner", label:"Intimschoner", img:"assets/intimschoner.png", order:1 },
+    { id:"knieschoner", label:"Knieschoner", img:"assets/knieschoner.png", order:5 },
     { id:"stuelpen", label:"Stülpen", img:"assets/stulpen.png", order:2 },
     { id:"hosen", label:"Hosen", img:"assets/hose.png", order:3 },
     { id:"schlittschuhe", label:"Schlittschuhe", img:"assets/schlittschuhe.png", order:4 },
-    { id:"knieschoner", label:"Knieschoner", img:"assets/knieschoner.png", order:5 },
     { id:"brustpanzer", label:"Brustpanzer", img:"assets/brustpanzer.png", order:6 },
     { id:"ellenbogenschoner", label:"Ellenbogenschoner", img:"assets/ellenbogenschoner.png", order:7 },
     { id:"trikot", label:"Trikot", img:"assets/trikot.png", order:8 },
@@ -56,8 +92,11 @@ document.addEventListener("DOMContentLoaded", () => {
   let dragging = null;
 
   /* Render-Funktion */
-    function render(){
-    scroller.innerHTML = "";
+  function render(){
+  scroller.innerHTML = "";
+
+  renderPlacedItems();
+  renderDebugZones();
 
   /* Alle noch nicht angezogenen IDs (in deiner zufälligen displayOrder) */
     const remainingIds = displayOrder.filter(id => !state.worn.includes(id));
@@ -97,8 +136,59 @@ document.addEventListener("DOMContentLoaded", () => {
       doneShown = true;
       openModal(doneModal);
     }
+    renderPlacedItems();
+
   }
 
+  function renderDebugZones(){
+  if(!snapLayer) return;
+
+  // alte Debug-Zonen entfernen (aber nicht die platzierten Items)
+  snapLayer.querySelectorAll(".snap-zone-debug").forEach(el => el.remove());
+
+  Object.entries(SNAP_ZONES).forEach(([id, z]) => {
+    const box = document.createElement("div");
+    box.className = "snap-zone-debug";
+    box.dataset.zoneId = id;
+
+    box.style.left = z.left + "%";
+    box.style.top = z.top + "%";
+    box.style.width = z.width + "%";
+    box.style.height = z.height + "%";
+
+    snapLayer.appendChild(box);
+  });
+}
+
+  function renderPlacedItems(){
+  if(!snapLayer) return;
+
+  snapLayer.querySelectorAll(".snap-item").forEach(el => el.remove());
+
+  // alles, was bereits korrekt “angezogen” wurde, wird angezeigt
+  state.worn.forEach(id => {
+    const pos = SNAP_POS[id];
+    if(!pos) return; // falls für ein Teil noch keine Position definiert ist
+
+    const item = WEARABLE.find(x => x.id === id);
+    if(!item) return;
+
+    const img = document.createElement("img");
+    img.className = "snap-item";
+    img.src = item.img;
+    img.alt = item.label;
+
+    img.style.left = pos.left + "%";
+    img.style.top = pos.top + "%";
+    img.style.width = pos.width + "%";
+    img.style.height = "auto";
+
+    snapLayer.appendChild(img);
+  });
+}
+
+
+ 
 
   /* Item-Karte */
   function makeItemCard(item){
@@ -186,6 +276,15 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    const zone = SNAP_ZONES[dragging.item.id];
+    if(zone && !isPointInSnapZone(x, y, zone, dropZone)){
+      showToast("Fast! Zieh es näher an die richtige Stelle");
+      hideGhost();
+      return;
+    }
+
+
+
     state.worn.push(dragging.item.id);
     state.currentStep += 1;
     saveJSON(STORAGE_KEYS.DRESS, state);
@@ -198,6 +297,17 @@ document.addEventListener("DOMContentLoaded", () => {
   function isPointInElement(x,y, el){
     const r = el.getBoundingClientRect();
     return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
+  }
+
+  function isPointInSnapZone(x,y, zone, container){
+    const r = container.getBoundingClientRect();
+    
+    const left = r.left + (zone.left / 100) * r.width;
+    const top = r.top + (zone.top / 100) * r.height;
+    const width = (zone.width / 100) * r.width;
+    const height = (zone.height / 100) * r.height;
+
+    return x >= left && x <= (left + width) && y >= top && y <= (top + height);
   }
 
   /* Modal-helper */
@@ -252,21 +362,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
   }
-
-  if(prevPageBtn){
-  prevPageBtn.addEventListener("click", () => {
-    page -= 1;
-    render();
-  });
-}
-
-if(nextPageBtn){
-  nextPageBtn.addEventListener("click", () => {
-    page += 1;
-    render();
-  });
-}
-
 
   if(prevPageBtn){
   prevPageBtn.addEventListener("click", () => {

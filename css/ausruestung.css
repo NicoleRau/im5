@@ -22,8 +22,6 @@
   display:block;
   pointer-events:none;
   user-select:none;
-  padding-top: 60px;
-  padding-bottom: 60px;
   box-sizing: border-box;
 }
 
@@ -57,9 +55,14 @@
 }
 
 /* Reihenfolge: Figur unten, Snap darüber */
-.drop-area .bg-img{ position: relative; z-index: 1;}
-.drop-hint{ z-index: 5;}
+.drop-area .bg-img{
+  position: relative;
+  z-index: 1;
+}
 
+.drop-hint{
+  z-index: 5;
+}
 
 .progress{
   font-weight: 900;
@@ -79,6 +82,7 @@
   display: flex;
   flex-direction: column;
 }
+
 .itembar-title{
   display:flex;
   align-items:center;
@@ -94,7 +98,11 @@
   gap: 10px;
   align-items: flex-start;
 }
-.scroller::-webkit-scrollbar{ height:10px; }
+
+.scroller::-webkit-scrollbar{
+  height:10px;
+}
+
 .scroller::-webkit-scrollbar-thumb{
   background: rgba(0,75,153,0.25);
   border-radius: 999px;
@@ -105,11 +113,23 @@
   align-items: center;
   gap:8px;
 }
+
 .pager .btn{
   height: 36px;
   padding: 0 12px;
 }
 
+.page-info{
+  font-weight: 800;
+}
+
+.modal-title{
+  margin-top: 0;
+}
+
+.modal-text{
+  font-weight: 600;
+}
 
 .item{
   width: 92px;
@@ -129,12 +149,14 @@
   user-select:none;
   touch-action:none; /* wichtig für Pointer-Drag */
 }
+
 .item img{
   width: 46px;
   height: 46px;
   object-fit: contain;
   pointer-events:none;
 }
+
 .item span{
   font-size: 11px;
   font-weight: 900;
@@ -157,9 +179,10 @@
   border-style: dashed;
   box-shadow: none;
 }
-.item.placeholder img{ display:none; }
 
-
+.item.placeholder img{
+  display:none;
+}
 
 /* Drag ghost */
 .drag-ghost{
@@ -181,24 +204,23 @@
   gap:6px;
   padding: 8px;
 }
+
 .drag-ghost img{
   width: 46px;
   height: 46px;
   object-fit: contain;
 }
+
 .drag-ghost span{
   font-size: 11px;
   font-weight: 900;
   text-align:center;
   line-height: 1.1;
-
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
-
   display: -webkit-box;
   -webkit-box-orient: vertical;
-
   word-break: break-word;
   hyphens: auto;
 }
@@ -209,7 +231,6 @@
   left: 50%;
   transform: translateX(-50%);
   top: auto;
-
   max-width: calc(100% - 40px);
   z-index: 6;
 }
@@ -224,122 +245,9 @@
   pointer-events: none;
 }
 
-/* ALT RESPONSIVE
 
-@media (max-width: 600px){
-  .header{
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
 
-  .header-actions{
-    align-self: stretch;
-    display: flex;
-    gap: 8px;
-  }
-
-  .header-actions .btn{
-    flex: 1;
-  }
-
-  .drop-hint{
-    font-size: 13px;
-    padding: 6px 10px;
-  }
-
-  .progress{
-    padding: 6px 10px;
-  }
-
-  .itembar{
-    height: 140px;
-    padding: 8px;
-  }
-
-  .item{
-    width: 80px;
-    min-width: 80px;
-    height: 80px;
-  }
-
-  .item img{
-    width: 40px;
-    height: 40px;
-  }
-
-  .item span{
-    font-size: 10px;
-  }
-}
-
-@media (max-width: 700px){
-
-  /* --- Header wie bei "Tasche" --- 
-  .header{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .header-actions{
-    width: 100%;
-    display: flex;
-    gap: 10px;
-  }
-
-  .header-actions .btn{
-    flex: 1;
-    height: 44px;
-  }
-
-  /* --- Drop-Area: weniger Leerfläche --- 
-  .drop-area{
-    min-height: clamp(340px, 55svh, 520px);
-  }
-
-  /* --- Itembar: kompakter + "Karten-Look" wie Tasche --- 
-  .itembar{
-    height: auto;
-    padding: 10px;
-  }
-
-  /* WICHTIG: aus 1 Reihe wird 2-Reihen-Grid (CSS-only) 
-  .scroller{
-    overflow: auto;         /* statt hidden 
-    flex-wrap: wrap;        /* statt 1 Reihe
-    align-content: flex-start;
-    gap: 10px;
-  }
-
-  /* Items etwas kleiner, damit 2 Reihen passen 
-  .item{
-    width: 82px;
-    min-width: 82px;
-    height: 92px;           /* etwas höher für Text 
-  }
-
-  .item img{
-    width: 40px;
-    height: 40px;
-  }
-
-  .item span{
-    font-size: 10px;
-  }
-
-  /* Pager nicht zu dominant 
-  .pager .btn{
-    height: 40px;
-    padding: 0 10px;
-  }
-} */
-
-/* =========================
-   RESPONSIVE wie "Tasche"
-   ========================= */
-
+/* RESPONSIVE */
 /* Tablet */
 @media (max-width: 900px){
   .container{ padding: 14px; }
@@ -350,7 +258,6 @@
 @media (max-width: 600px){
   .container{ padding: 12px; }
 
-  /* Header: Titel oben, Buttons darunter (volle Breite) */
   .header{
     flex-direction: column;
     align-items: stretch;
@@ -361,10 +268,9 @@
     width: 100%;
     display: flex;
     gap: 10px;
-    justify-content: flex-end; /* wie Tasche */
+    justify-content: flex-end;
   }
 
-  /* Wenn du willst: beide Buttons gleich breit (wie in Tasche nicht zwingend) */
   .header-actions .btn.secondary{
     min-width: 0;
     flex: 1;
@@ -374,12 +280,10 @@
     font-size: 34px;
   }
 
-  /* Drop-Area: mobile passende Höhe */
   .drop-area{
     min-height: 420px;
   }
 
-  /* Hint-Leiste kompakter + darf umbrechen */
   .drop-hint{
     inset: 8px 8px auto 8px;
     padding: 6px 10px;
@@ -393,18 +297,16 @@
     padding: 6px 10px;
   }
 
-  /* Itembar: wie Tasche (2 Reihen möglich) */
   .itembar{
     height: 280px;
     padding: 8px;
   }
 
-  /* Scroller als 2x5 Grid wie Tasche */
   .scroller{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
-    overflow: visible;   /* kein horizontales Scrollen */
+    overflow: visible;
     align-items: stretch;
   }
 
@@ -436,7 +338,6 @@
     max-width: calc(100% - 18px);
   }
 
-  /* WICHTIG: kein Bild-Padding (sonst stimmt SnapRect/Zone wieder schlechter) */
   .drop-area .bg-img{
     padding: 0;
   }

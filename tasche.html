@@ -36,7 +36,7 @@
         <strong>Teile</strong>
         <div class="pager">
           <button class="btn secondary" id="prevPageBtn" type="button" aria-label="Vorherige Seite">◀</button>
-          <span id="pageInfo" style="font-weight:800;">1/1</span>
+          <span id="pageInfo" class="page-info">1/1</span>
           <button class="btn secondary" id="nextPageBtn" type="button" aria-label="Nächste Seite">▶</button>
         </div>
       </div>
@@ -49,8 +49,9 @@
 
   <div class="modal" id="resetBagModal" aria-hidden="true">
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="resetTitle">
-      <h2 id="resetTitle" style="margin-top:0;">Tasche zurücksetzen?</h2>
-      <p style="font-weight:600;">Alle gepackten Teile werden entfernt.</p>
+      <h2 id="resetTitle" class="modal-title">Tasche zurücksetzen?</h2>
+      <p class="modal-text">Alle gepackten Teile werden entfernt.</p>
+
 
       <div class="modal-actions">
         <button class="btn secondary" id="cancelBagReset">Abbrechen</button>
@@ -61,8 +62,8 @@
 
   <div class="modal" id="doneBagModal" aria-hidden="true">
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="doneTitle">
-      <h2 id="doneTitle" style="margin-top:0;">Super!</h2>
-      <p style="font-weight:600;">Du hast alle Teile in die Tasche gepackt!</p>
+      <h2 id="doneTitle" class="modal-title">Super!</h2>
+      <p class="modal-text">Du hast alle Teile in die Tasche gepackt!</p>
 
       <div class="modal-actions">
         <button class="btn secondary" id="replayBagBtn">Nochmal packen</button>

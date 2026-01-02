@@ -119,7 +119,6 @@
   justify-content:center;
   gap:6px;
   padding: 8px;
-  /*scroll-snap-align: start;*/
   user-select:none;
   touch-action:none; /* wichtig für Pointer-Drag */
 }
@@ -175,16 +174,27 @@
   gap: 6px;
   padding: 8px;
 }
+
 .drag-ghost img{
   width: 46px;
   height: 46px;
   object-fit: contain;
 }
+
 .drag-ghost span{
   font-size: 11px;
   font-weight: 900;
   text-align: center;
 }
+
+.modal-title{
+  margin-top: 0;
+}
+
+.modal-text{
+  font-weight: 600;
+}
+
 
 
 /* RESPONSIVE */
@@ -206,6 +216,7 @@
     align-items: stretch;
     gap: 10px;
   }
+
   .header-actions{
     width: 100%;
     justify-content: flex-end;
@@ -227,8 +238,10 @@
     font-size: 13px;
     flex-wrap: wrap;
   }
+
   .progress{
     padding: 6px 10px;
+    border-radius: 999px;
   }
 
   .itembar{
@@ -239,6 +252,7 @@
   .scroller{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: 1fr;
     gap: 10px;
     overflow: visible;
     align-items: stretch;
@@ -276,194 +290,3 @@
     padding: 28px 10px 72px;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ===== Responsive: Handy ===== */
-@media (max-width: 600px){
-
-  .container{
-    padding: 12px;
-  }
-
-  /* Header: Titel oben, Buttons darunter/rechts */
-  .header{
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-  }
-
-  .header-actions{
-    width: 100%;
-    justify-content: flex-end;
-  }
-
-  .brand h1{
-    font-size: 34px;
-  }
-
-  /* Drop-Area: nicht zu flach */
-  .drop-area{
-    min-height: 360px;
-  }
-
-  /* Hint oben: darf umbrechen */
-  .drop-hint{
-    border-radius: 16px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  /* Itembar: etwas kompakter */
-  .itembar{
-    height: 280px;
-    padding: 8px;
-  }
-
-  .item{
-    width: 84px;
-    min-width: 84px;
-    height: 84px;
-    border-radius: 14px;
-  }
-
-  .item img{
-    width: 40px;
-    height: 40px;
-  }
-
-  .pager .btn{
-    height: 34px;
-    padding: 0 10px;
-  }
-
-  /* Toast im Drop-Feld: näher an den Rand, mehr Platz */
-  .toast.in-drop{
-    bottom: 10px;
-    max-width: calc(100% - 24px);
-  }
-  
-}
-
-/* ===== Tablet ===== */
-@media (max-width: 900px){
-  .container{ padding: 14px; }
- 
-  .drop-area{
-    min-height: 420px;
-  }
-}
-
-/* ===== Handy ===== */
-@media (max-width: 600px){
-
-  .container{ padding: 12px; }
-
-  /* Header: kompakter und sauber umbrechen */
-  .header{
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-  }
-  .header-actions{
-    justify-content: flex-end;
-  }
-
-  /* Drop-Bereich nicht zu klein */
-  .drop-area{
-    min-height: 340px;
-  }
-
-  /* Hint-Leiste kompakter */
-  .drop-hint{
-    inset: 8px 8px auto 8px;
-    padding: 6px 10px;
-    border-radius: 14px;
-    gap: 6px;
-    font-size: 13px; /* wirkt weniger "riesig" */
-  }
-
-  .progress{
-    padding: 6px 10px;
-    border-radius: 999px;
-  }
-
-  /* Itembar: mehr Höhe für 2 Reihen */
-  .itembar{
-    height: 280px;           /* wichtig: Platz für 2 Reihen */
-    padding: 8px;
-  }
-
-  /* >>> 2 Reihen (2x5 Grid) <<< */
-  .scroller{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 pro Reihe */
-    grid-auto-rows: 1fr;
-    gap: 10px;
-    overflow: visible;        /* kein horizontales Scrollen */
-    align-items: stretch;
-  }
-
-  /* Items: responsive in Grid-Zellen */
-  .item{
-    width: auto;
-    min-width: 0;
-    height: 92px;
-  }
-
-  .item img{
-    width: 38px;
-    height: 38px;
-  }
-
-  .item span{
-    font-size: 10px;
-  }
-
-  /* Pager Buttons: fingerfreundlich */
-  .pager .btn{
-    height: 34px;
-    padding: 0 10px;
-  }
-
-  /* Toast im Drop-Feld: mehr Platz */
-  .toast.in-drop{
-    bottom: 8px;
-    padding: 10px 12px;
-    font-size: 14px;
-    border-radius: 16px;
-    max-width: calc(100% - 18px);
-  }
-
-  
-  .drop-area{
-    min-height: 420px; /* statt 340px */
-  }
-
-  .drop-area .bg-img{
-    object-fit: contain;
-    padding: 28px 10px 72px; 
-    /* oben Platz für Hint,
-       unten Platz für Toast */
-  }
-}
-

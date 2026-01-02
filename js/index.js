@@ -26,19 +26,6 @@ function saveJSON(key, value){
   localStorage.setItem(key, JSON.stringify(value));
 }
 
-function resetAll(){
-  try{
-    localStorage.removeItem(STORAGE_KEYS.BAG);
-    localStorage.removeItem(STORAGE_KEYS.DRESS);
-  }catch(e){}
-}
-
 document.addEventListener("DOMContentLoaded", () => {
-  const resetBtn = document.getElementById("resetBtn");
-  if(resetBtn){
-    resetBtn.addEventListener("click", () => {
-      resetAll();
-      showToast("Alles zurückgesetzt.");
-    });
-  }
+  
 });

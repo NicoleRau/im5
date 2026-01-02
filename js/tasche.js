@@ -146,15 +146,21 @@ document.addEventListener("DOMContentLoaded", () => {
   function endDrag(x,y){
     const hit = isPointInElement(x, y, dropZone);
     if(hit){
-      state.packed.push(dragging.item.id);
-      saveJSON(STORAGE_KEYS.BAG, state);
-      showToast(`Du hast ${dragging.item.label} in die Tasche getan.`);
-      render();
+      const id = dragging.item.id;
+      if(!state.packed.includes(id)){
+        state.packed.push(id);
+        saveJSON(STORAGE_KEYS.BAG, state);
+        showToast(`Du hast ${dragging.item.label} in die Tasche getan.`);
+        render();
+      }else{
+        showToast("Das hast du schon eingepackt!");
+      }
     }else{
       showToast(`Das gehört nicht dahin – versuch’s nochmal!`);
     }
-    hideGhost();
-  }
+  hideGhost();
+}
+
 
   function isPointInElement(x,y, el){
     const r = el.getBoundingClientRect();

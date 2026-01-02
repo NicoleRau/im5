@@ -144,11 +144,12 @@
 }
 
 /* Platzhalter */
-.item placeholer{
+.item placeholder{
   opacity: 0.25;
   border-style: dashed;
   box-shadow: none;
 }
+  
 .item placeholder img{
   display:none;
 }

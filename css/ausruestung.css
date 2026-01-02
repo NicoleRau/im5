@@ -12,6 +12,7 @@
   background: rgba(255,255,255,0.35);
   box-shadow: var(--shadow);
   overflow:hidden;
+  min-height: clamp(320px, 60vh, 520px);
 }
 
 .drop-area .bg-img{
@@ -222,3 +223,222 @@
   z-index: 4;
   pointer-events: none;
 }
+
+/* ALT RESPONSIVE
+
+@media (max-width: 600px){
+  .header{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .header-actions{
+    align-self: stretch;
+    display: flex;
+    gap: 8px;
+  }
+
+  .header-actions .btn{
+    flex: 1;
+  }
+
+  .drop-hint{
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+  .progress{
+    padding: 6px 10px;
+  }
+
+  .itembar{
+    height: 140px;
+    padding: 8px;
+  }
+
+  .item{
+    width: 80px;
+    min-width: 80px;
+    height: 80px;
+  }
+
+  .item img{
+    width: 40px;
+    height: 40px;
+  }
+
+  .item span{
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 700px){
+
+  /* --- Header wie bei "Tasche" --- 
+  .header{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .header-actions{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+  }
+
+  .header-actions .btn{
+    flex: 1;
+    height: 44px;
+  }
+
+  /* --- Drop-Area: weniger Leerfläche --- 
+  .drop-area{
+    min-height: clamp(340px, 55svh, 520px);
+  }
+
+  /* --- Itembar: kompakter + "Karten-Look" wie Tasche --- 
+  .itembar{
+    height: auto;
+    padding: 10px;
+  }
+
+  /* WICHTIG: aus 1 Reihe wird 2-Reihen-Grid (CSS-only) 
+  .scroller{
+    overflow: auto;         /* statt hidden 
+    flex-wrap: wrap;        /* statt 1 Reihe
+    align-content: flex-start;
+    gap: 10px;
+  }
+
+  /* Items etwas kleiner, damit 2 Reihen passen 
+  .item{
+    width: 82px;
+    min-width: 82px;
+    height: 92px;           /* etwas höher für Text 
+  }
+
+  .item img{
+    width: 40px;
+    height: 40px;
+  }
+
+  .item span{
+    font-size: 10px;
+  }
+
+  /* Pager nicht zu dominant 
+  .pager .btn{
+    height: 40px;
+    padding: 0 10px;
+  }
+} */
+
+/* =========================
+   RESPONSIVE wie "Tasche"
+   ========================= */
+
+/* Tablet */
+@media (max-width: 900px){
+  .container{ padding: 14px; }
+  .drop-area{ min-height: 420px; }
+}
+
+/* Handy */
+@media (max-width: 600px){
+  .container{ padding: 12px; }
+
+  /* Header: Titel oben, Buttons darunter (volle Breite) */
+  .header{
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .header-actions{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end; /* wie Tasche */
+  }
+
+  /* Wenn du willst: beide Buttons gleich breit (wie in Tasche nicht zwingend) */
+  .header-actions .btn.secondary{
+    min-width: 0;
+    flex: 1;
+  }
+
+  .brand h1{
+    font-size: 34px;
+  }
+
+  /* Drop-Area: mobile passende Höhe */
+  .drop-area{
+    min-height: 420px;
+  }
+
+  /* Hint-Leiste kompakter + darf umbrechen */
+  .drop-hint{
+    inset: 8px 8px auto 8px;
+    padding: 6px 10px;
+    border-radius: 14px;
+    gap: 6px;
+    font-size: 13px;
+    flex-wrap: wrap;
+  }
+
+  .progress{
+    padding: 6px 10px;
+  }
+
+  /* Itembar: wie Tasche (2 Reihen möglich) */
+  .itembar{
+    height: 280px;
+    padding: 8px;
+  }
+
+  /* Scroller als 2x5 Grid wie Tasche */
+  .scroller{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    overflow: visible;   /* kein horizontales Scrollen */
+    align-items: stretch;
+  }
+
+  .item{
+    width: auto;
+    min-width: 0;
+    height: 92px;
+  }
+
+  .item img{
+    width: 38px;
+    height: 38px;
+  }
+
+  .item span{
+    font-size: 10px;
+  }
+
+  .pager .btn{
+    height: 34px;
+    padding: 0 10px;
+  }
+
+  .toast.in-drop{
+    bottom: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+    border-radius: 16px;
+    max-width: calc(100% - 18px);
+  }
+
+  /* WICHTIG: kein Bild-Padding (sonst stimmt SnapRect/Zone wieder schlechter) */
+  .drop-area .bg-img{
+    padding: 0;
+  }
+}
+

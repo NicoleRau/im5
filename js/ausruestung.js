@@ -27,6 +27,49 @@ document.addEventListener("DOMContentLoaded", () => {
   /* Snap */
   const snapLayer = document.getElementById("snapLayer");
 
+  const bgImg = document.getElementById("bgImg");
+
+  function layoutSnapLayerToImage(){
+    if(!dropZone || !snapLayer || !bgImg) return;
+
+    const r = dropZone.getBoundingClientRect();
+    const iw = bgImg.naturalWidth;
+    const ih = bgImg.naturalHeight;
+    if(!iw || !ih) return;
+
+    const cr = r.width / r.height;
+    const ir = iw / ih;
+
+    let w, h, x, y;
+    if(cr > ir){
+      h = r.height;
+      w = h * ir;
+      x = (r.width - w) / 2;
+      y = 0;
+    } else {
+      w = r.width;
+      h = w / ir;
+      x = 0;
+      y = (r.height - h) / 2;
+    }
+
+    snapLayer.style.left = x + "px";
+    snapLayer.style.top = y + "px";
+    snapLayer.style.width = w + "px";
+    snapLayer.style.height = h + "px";
+  }
+
+  function getSnapRect(){
+    const r = dropZone.getBoundingClientRect();
+    return {
+      left: r.left + (parseFloat(snapLayer.style.left) || 0),
+      top: r.top + (parseFloat(snapLayer.style.top) || 0),
+      width: parseFloat(snapLayer.style.width) || r.width,
+      height: parseFloat(snapLayer.style.height) || r.height
+    };
+  }
+
+
   const pageSize = 10;
   let page = 0;
   let doneShown = false;
@@ -277,7 +320,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const zone = SNAP_ZONES[dragging.item.id];
-    if(zone && !isPointInSnapZone(x, y, zone, dropZone)){
+    if(zone && !isPointInSnapZone(x, y, zone)){
       showToast("Fast! Zieh es näher an die richtige Stelle");
       hideGhost();
       return;
@@ -299,16 +342,17 @@ document.addEventListener("DOMContentLoaded", () => {
     return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
   }
 
-  function isPointInSnapZone(x,y, zone, container){
-    const r = container.getBoundingClientRect();
-    
-    const left = r.left + (zone.left / 100) * r.width;
-    const top = r.top + (zone.top / 100) * r.height;
-    const width = (zone.width / 100) * r.width;
-    const height = (zone.height / 100) * r.height;
+  function isPointInSnapZone(x,y, zone){
+    const sr = getSnapRect();
+
+    const left = sr.left + (zone.left / 100) * sr.width;
+    const top = sr.top + (zone.top / 100) * sr.height;
+    const width = (zone.width / 100) * sr.width;
+    const height = (zone.height / 100) * sr.height;
 
     return x >= left && x <= (left + width) && y >= top && y <= (top + height);
   }
+
 
   /* Modal-helper */
   function openModal (el){
@@ -386,14 +430,14 @@ document.addEventListener("DOMContentLoaded", () => {
     page -= 1;
     render();
   });
-}
+  }
 
-if(nextPageBtn){
+  if(nextPageBtn){
   nextPageBtn.addEventListener("click", () => {
     page += 1;
     render();
   });
-}
+  }
 
 
   function shuffleArray(arr){
@@ -405,6 +449,20 @@ if(nextPageBtn){
     return a;
   }
 
-  render();
+  function init(){
+    layoutSnapLayerToImage();
+    render();
+  }
+
+  if(bgImg && !bgImg.complete){
+    bgImg.addEventListener("load", init, { once:true });
+  } else {
+    init();
+  }
+
+  window.addEventListener("resize", () => {
+    layoutSnapLayerToImage();
+  });
+
 
 });

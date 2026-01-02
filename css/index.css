@@ -1,6 +1,27 @@
-/* Startseite: Karten immer untereinander (auch am Desktop) */
 .page-index .grid{
-  grid-template-columns: 1fr !important;
-  max-width: 920px;          /* optional: damit es nicht zu breit wirkt */
+  grid-template-columns: 1fr;
+  max-width: 920px;
   margin: 0 auto;
+}
+
+@media (min-width: 800px){
+  .page-index .grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+.page-index .index-title{
+  margin-top: 0;
+}
+
+.page-index .index-lead{
+  font-weight: 600;
+  margin-top: 0;
+}
+
+.page-index .index-actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
 }

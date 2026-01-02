@@ -1,4 +1,3 @@
-// Gemeinsame Mini-Utilities für alle Seiten (hier bewusst klein gehalten)
 const STORAGE_KEYS = {
   BAG: "hockey_bag_packed",
   DRESS: "hockey_dress_state"
@@ -22,13 +21,16 @@ function loadJSON(key, fallback){
     return fallback;
   }
 }
+
 function saveJSON(key, value){
   localStorage.setItem(key, JSON.stringify(value));
 }
 
 function resetAll(){
-  localStorage.removeItem(STORAGE_KEYS.BAG);
-  localStorage.removeItem(STORAGE_KEYS.DRESS);
+  try{
+    localStorage.removeItem(STORAGE_KEYS.BAG);
+    localStorage.removeItem(STORAGE_KEYS.DRESS);
+  }catch(e){}
 }
 
 document.addEventListener("DOMContentLoaded", () => {

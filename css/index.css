@@ -4,6 +4,8 @@
   margin: 0 auto;
 }
 
+/* Responsive */
+
 @media (min-width: 800px){
   .page-index .grid{
     grid-template-columns: 1fr;
